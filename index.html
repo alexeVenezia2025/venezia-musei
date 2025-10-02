@@ -19,7 +19,6 @@
             overflow: hidden;
         }
 
-        /* Login Screen */
         #login-screen {
             position: fixed;
             top: 0;
@@ -88,7 +87,6 @@
             transform: translateY(-2px);
         }
 
-        /* Header */
         #header {
             position: fixed;
             top: 0;
@@ -165,7 +163,6 @@
             background: #e0e0e0;
         }
 
-        /* Main Container */
         #main-container {
             position: fixed;
             top: 70px;
@@ -175,26 +172,18 @@
             display: flex;
         }
 
-        /* Sidebar */
         #sidebar {
             width: 320px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             overflow-y: auto;
             box-shadow: 2px 0 20px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        #sidebar.hidden {
-            width: 0;
-            overflow: hidden;
         }
 
         .sidebar-header {
             padding: 20px;
             background: #81C9DF;
             color: white;
-            position: relative;
         }
 
         .sidebar-header h2 {
@@ -230,47 +219,18 @@
             color: #81C9DF;
         }
 
-        /* Toggle Sidebar Button */
-        .toggle-sidebar-btn {
-            position: fixed;
-            top: 90px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            background: white;
-            border: 2px solid #81C9DF;
-            border-radius: 50%;
-            color: #81C9DF;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            z-index: 999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .toggle-sidebar-btn:hover {
-            background: #81C9DF;
-            color: white;
-            transform: scale(1.1);
-        }
-
-        /* Map */
         #map {
             flex: 1;
-            cursor: crosshair;
-        }
-
-        #map.normal-cursor {
             cursor: default;
         }
 
-        /* Add Mode Indicator */
+        #map.adding-mode {
+            cursor: crosshair;
+        }
+
         .add-mode-indicator {
             position: fixed;
-            top: 90px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
             background: #81C9DF;
@@ -287,7 +247,6 @@
             display: block;
         }
 
-        /* Popup Custom */
         .mapboxgl-popup-content {
             padding: 0;
             border-radius: 16px;
@@ -300,7 +259,6 @@
             padding: 20px;
             background: linear-gradient(135deg, #81C9DF 0%, #6ab5cc 100%);
             color: white;
-            position: relative;
         }
 
         .popup-title {
@@ -314,31 +272,6 @@
             opacity: 0.9;
         }
 
-        .popup-actions {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .popup-action-btn {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .popup-action-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
-        }
-
         .popup-body {
             padding: 20px;
             max-height: 450px;
@@ -346,7 +279,7 @@
         }
 
         .popup-body::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
 
         .popup-body::-webkit-scrollbar-track {
@@ -359,14 +292,16 @@
             border-radius: 10px;
         }
 
+        .popup-body::-webkit-scrollbar-thumb:hover {
+            background: #6ab5cc;
+        }
+
         .popup-main-description {
             color: #333;
             line-height: 1.6;
             margin-bottom: 20px;
-            max-height: none;
         }
 
-        /* Carousel */
         .carousel-container {
             position: relative;
             margin-top: 20px;
@@ -425,7 +360,7 @@
             transition: all 0.3s;
         }
 
-        .carousel-btn:hover {
+        .carousel-btn:hover:not(:disabled) {
             background: #6ab5cc;
             transform: scale(1.1);
         }
@@ -455,7 +390,6 @@
             border-radius: 4px;
         }
 
-        /* How to Arrive */
         .how-to-arrive {
             margin-top: 20px;
             padding: 15px;
@@ -476,157 +410,40 @@
             font-size: 14px;
         }
 
-        /* Edit Form Modal */
-        .edit-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 10000;
-            overflow-y: auto;
-        }
-
-        .edit-modal.active {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding: 50px 20px;
-        }
-
-        .edit-modal-content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .edit-modal-content h2 {
-            margin-bottom: 20px;
-            color: #333;
-            font-size: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #81C9DF;
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .subsection-item {
-            background: #f8f8f8;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .subsection-item .remove-subsection {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .modal-actions {
+        .popup-actions {
             display: flex;
             gap: 10px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
-        .modal-actions button {
+        .popup-action-btn {
             flex: 1;
-            padding: 15px;
+            padding: 10px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
+            font-weight: 600;
             transition: all 0.3s;
         }
 
-        .btn-save {
+        .edit-btn {
             background: #81C9DF;
             color: white;
         }
 
-        .btn-save:hover {
+        .edit-btn:hover {
             background: #6ab5cc;
         }
 
-        .btn-cancel {
-            background: #f0f0f0;
-            color: #333;
-        }
-
-        .btn-cancel:hover {
-            background: #e0e0e0;
-        }
-
-        .btn-add {
-            background: #81C9DF;
+        .delete-btn {
+            background: #ff6b6b;
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 10px;
         }
 
-        .btn-add:hover {
-            background: #6ab5cc;
+        .delete-btn:hover {
+            background: #ff5252;
         }
 
-        /* Admin Panel */
         .admin-btn {
             position: fixed;
             bottom: 30px;
@@ -689,13 +506,175 @@
             background: #6ab5cc;
         }
 
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 10001;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #81C9DF;
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #333;
+        }
+
+        .close-modal {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #81C9DF;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .subsections-container {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .subsection-item {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .remove-subsection {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .add-subsection-btn {
+            background: #81C9DF;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .save-btn {
+            background: #81C9DF;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .save-btn:hover {
+            background: #6ab5cc;
+        }
+
         .hidden {
             display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Login Screen -->
     <div id="login-screen">
         <div class="login-box">
             <h1>🏛️ Venezia Musei</h1>
@@ -705,9 +684,7 @@
         </div>
     </div>
 
-    <!-- Main App -->
     <div id="app" class="hidden">
-        <!-- Header -->
         <div id="header">
             <div class="header-left">
                 <span class="header-title">🏛️ <span id="header-title-text">Musei di Venezia</span></span>
@@ -724,121 +701,102 @@
             </div>
         </div>
 
-        <!-- Toggle Sidebar Button -->
-        <button class="toggle-sidebar-btn" onclick="toggleSidebar()">☰</button>
-
-        <!-- Add Mode Indicator -->
         <div class="add-mode-indicator" id="add-mode-indicator">
             📍 Clicca sulla mappa per aggiungere un museo
         </div>
 
-        <!-- Main Container -->
         <div id="main-container">
-            <!-- Sidebar -->
             <div id="sidebar">
                 <div class="sidebar-header">
                     <h2 id="sidebar-title">Legenda Musei</h2>
                 </div>
                 <div id="places-list"></div>
             </div>
-
-            <!-- Map -->
-            <div id="map" class="normal-cursor"></div>
+            <div id="map"></div>
         </div>
 
-        <!-- Admin Button -->
         <button class="admin-btn" onclick="toggleAdmin()">⚙️</button>
 
-        <!-- Admin Panel -->
         <div id="admin-panel" class="admin-panel">
             <h3>🔧 Gestione Dati</h3>
-            <button onclick="toggleAddMode()">📍 Aggiungi Museo sulla Mappa</button>
+            <button onclick="startAddingMode()">📍 Aggiungi Museo sulla Mappa</button>
             <button onclick="exportData()">📥 Esporta Dati (JSON)</button>
             <button onclick="document.getElementById('import-file').click()">📤 Importa Dati (JSON)</button>
             <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
             <button onclick="resetToDefault()">🔄 Ripristina Dati Predefiniti</button>
         </div>
+    </div>
 
-        <!-- Edit Modal -->
-        <div id="edit-modal" class="edit-modal">
-            <div class="edit-modal-content">
-                <h2 id="modal-title">✏️ Modifica Museo</h2>
-                <form id="edit-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Nome (Italiano)</label>
-                            <input type="text" id="edit-name-it" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Nome (Inglese)</label>
-                            <input type="text" id="edit-name-en" required>
-                        </div>
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Aggiungi Museo</h2>
+                <button class="close-modal" onclick="closeEditModal()">×</button>
+            </div>
+            <form id="edit-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome (IT)</label>
+                        <input type="text" id="name-it" required>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Durata visita (minuti)</label>
-                            <input type="number" id="edit-duration">
-                        </div>
-                        <div class="form-group">
-                            <label>Latitudine</label>
-                            <input type="number" step="0.000001" id="edit-lat" required>
-                        </div>
+                    <div class="form-group">
+                        <label>Nome (EN)</label>
+                        <input type="text" id="name-en" required>
                     </div>
-
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Durata (minuti)</label>
+                        <input type="number" id="duration" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Latitudine</label>
+                        <input type="number" step="any" id="latitude" required>
+                    </div>
                     <div class="form-group">
                         <label>Longitudine</label>
-                        <input type="number" step="0.000001" id="edit-lng" required>
+                        <input type="number" step="any" id="longitude" required>
                     </div>
-
-                    <div class="form-group">
-                        <label>Descrizione (Italiano)</label>
-                        <textarea id="edit-desc-it" required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Descrizione (Inglese)</label>
-                        <textarea id="edit-desc-en" required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Come Arrivare (Italiano)</label>
-                        <textarea id="edit-arrive-it"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Come Arrivare (Inglese)</label>
-                        <textarea id="edit-arrive-en"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Sottosezioni</label>
-                        <div id="subsections-container"></div>
-                        <button type="button" class="btn-add" onclick="addSubsection()">➕ Aggiungi Sottosezione</button>
-                    </div>
-
-                    <div class="modal-actions">
-                        <button type="button" class="btn-cancel" onclick="closeEditModal()">Annulla</button>
-                        <button type="submit" class="btn-save">💾 Salva</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="form-group">
+                    <label>Descrizione (IT)</label>
+                    <textarea id="description-it" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Descrizione (EN)</label>
+                    <textarea id="description-en" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Come Arrivare (IT)</label>
+                    <textarea id="arrive-it" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Come Arrivare (EN)</label>
+                    <textarea id="arrive-en" required></textarea>
+                </div>
+                
+                <div class="subsections-container">
+                    <h3>Sottosezioni</h3>
+                    <div id="subsections-list"></div>
+                    <button type="button" class="add-subsection-btn" onclick="addSubsectionField()">➕ Aggiungi Sottosezione</button>
+                </div>
+                
+                <button type="submit" class="save-btn">💾 Salva</button>
+            </form>
         </div>
     </div>
 
     <script>
-        // Configuration
         mapboxgl.accessToken = 'pk.eyJ1IjoiYWxleGVhbmdlbGEiLCJhIjoiY21nNnltb3lqMG00NjJtc2U1MGwzeGhkYiJ9.-b-5VYMsx38e2YB6JB4qEw';
         const PASSWORD = 'venezia2025';
         let currentLanguage = 'it';
         let map;
         let markers = [];
         let currentPopup = null;
-        let addMode = false;
+        let isAddingMode = false;
         let editingMuseumId = null;
-        let subsectionCounter = 0;
+        let temporaryMarker = null;
 
-        // Museums Data
         const defaultMuseums = [
             {
                 id: 1,
@@ -853,19 +811,41 @@
                     {
                         title: { it: "Architettura e Storia", en: "Architecture and History" },
                         description: { it: "L'attuale edificio risale principalmente al XIV-XV secolo. La facciata presenta un elegante loggiato al piano terra e al primo piano, sormontato da un corpo compatto rivestito di marmi bianchi e rosa.", en: "The current building dates mainly from the 14th-15th century. The facade features an elegant loggia on the ground and first floors, surmounted by a compact body covered with white and pink marble." }
+                    },
+                    {
+                        title: { it: "Sale Principali", en: "Main Halls" },
+                        description: { it: "All'interno si trovano capolavori come la Sala del Maggior Consiglio con il 'Paradiso' di Tintoretto, la Sala del Senato, la Sala del Collegio con opere di Veronese, e gli appartamenti del Doge.", en: "Inside you'll find masterpieces such as the Great Council Hall with Tintoretto's 'Paradise', the Senate Hall, the Collegio Hall with works by Veronese, and the Doge's apartments." }
                     }
                 ],
                 howToArrive: {
                     it: "Vaporetto: linee 1, 2, 5.1, 5.2 fermata San Marco-San Zaccaria. A piedi da Piazza San Marco.",
                     en: "Vaporetto: lines 1, 2, 5.1, 5.2 stop at San Marco-San Zaccaria. Walking from St. Mark's Square."
                 }
+            },
+            {
+                id: 2,
+                name: { it: "Gallerie dell'Accademia", en: "Accademia Galleries" },
+                duration: 90,
+                coordinates: [12.3282, 45.4312],
+                description: {
+                    it: "Le Gallerie dell'Accademia ospitano la più importante collezione di arte veneziana al mondo, con opere dal XIV al XVIII secolo.",
+                    en: "The Accademia Galleries house the world's most important collection of Venetian art, with works from the 14th to 18th centuries."
+                },
+                subsections: [
+                    {
+                        title: { it: "Capolavori Veneziani", en: "Venetian Masterpieces" },
+                        description: { it: "La collezione include opere di Bellini, Giorgione, Tiziano, Tintoretto, Veronese e Canaletto. Tra i capolavori: 'La Tempesta' di Giorgione, 'La Cena in Casa Levi' di Veronese.", en: "The collection includes works by Bellini, Giorgione, Titian, Tintoretto, Veronese and Canaletto. Among the masterpieces: Giorgione's 'The Tempest', Veronese's 'Feast in the House of Levi'." }
+                    }
+                ],
+                howToArrive: {
+                    it: "Vaporetto: linea 1 o 2 fermata Accademia. Si trova sul Canal Grande vicino al Ponte dell'Accademia.",
+                    en: "Vaporetto: line 1 or 2 stop Accademia. Located on the Grand Canal near the Accademia Bridge."
+                }
             }
         ];
 
-        // Load data
         let museums = JSON.parse(localStorage.getItem('venezia-musei-data')) || defaultMuseums;
 
-        // Login
         function checkPassword() {
             const input = document.getElementById('password-input').value;
             if (input === PASSWORD) {
@@ -881,7 +861,6 @@
             if (e.key === 'Enter') checkPassword();
         });
 
-        // Language
         function setLanguage(lang) {
             currentLanguage = lang;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
@@ -891,14 +870,8 @@
 
         function updateLanguage() {
             const texts = {
-                it: {
-                    headerTitle: 'Musei di Venezia',
-                    sidebarTitle: 'Legenda Musei'
-                },
-                en: {
-                    headerTitle: 'Venice Museums',
-                    sidebarTitle: 'Museums Legend'
-                }
+                it: { headerTitle: 'Musei di Venezia', sidebarTitle: 'Legenda Musei' },
+                en: { headerTitle: 'Venice Museums', sidebarTitle : 'Museums Legend' }
             };
             document.getElementById('header-title-text').textContent = texts[currentLanguage].headerTitle;
             document.getElementById('sidebar-title').textContent = texts[currentLanguage].sidebarTitle;
@@ -906,19 +879,12 @@
             if (currentPopup) currentPopup.remove();
         }
 
-        // Toggle Sidebar
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('hidden');
-        }
-
-        // Initialize App
         function initializeApp() {
             initMap();
             renderPlacesList();
             addMarkers();
         }
 
-        // Initialize Map
         function initMap() {
             map = new mapboxgl.Map({
                 container: 'map',
@@ -929,31 +895,15 @@
 
             map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
-            // Map click for adding places
             map.on('click', (e) => {
-                if (addMode) {
-                    openEditModalForNew(e.lngLat);
-                    toggleAddMode();
+                if (isAddingMode) {
+                    const coords = [e.lngLat.lng, e.lngLat.lat];
+                    openEditModal(null, coords);
+                    stopAddingMode();
                 }
             });
         }
 
-        // Toggle Add Mode
-        function toggleAddMode() {
-            addMode = !addMode;
-            const indicator = document.getElementById('add-mode-indicator');
-            const mapEl = document.getElementById('map');
-            
-            if (addMode) {
-                indicator.classList.add('active');
-                mapEl.classList.remove('normal-cursor');
-            } else {
-                indicator.classList.remove('active');
-                mapEl.classList.add('normal-cursor');
-            }
-        }
-
-        // Render Places List
         function renderPlacesList() {
             const list = document.getElementById('places-list');
             list.innerHTML = '';
@@ -976,7 +926,7 @@
                 
                 const duration = document.createElement('div');
                 duration.className = 'place-duration';
-                duration.textContent = museum.duration ? `⏱️ ${museum.duration} ${currentLanguage === 'it' ? 'min' : 'min'}` : '';
+                duration.textContent = museum.duration ? `⏱️ ${museum.duration} min` : '';
                 
                 item.appendChild(name);
                 item.appendChild(duration);
@@ -984,7 +934,6 @@
             });
         }
 
-        // Add Markers
         function addMarkers() {
             markers.forEach(marker => marker.remove());
             markers = [];
@@ -1006,7 +955,6 @@
             });
         }
 
-        // Show Popup
         function showPopup(museum) {
             if (currentPopup) currentPopup.remove();
 
@@ -1016,10 +964,6 @@
                 <div class="popup-header">
                     <div class="popup-title">${museum.name[currentLanguage]}</div>
                     ${museum.duration ? `<div class="popup-duration">⏱️ ${museum.duration} ${currentLanguage === 'it' ? 'minuti' : 'minutes'}</div>` : ''}
-                    <div class="popup-actions">
-                        <button class="popup-action-btn" onclick="editMuseum(${museum.id})">✏️</button>
-                        <button class="popup-action-btn" onclick="deleteMuseum(${museum.id})">🗑️</button>
-                    </div>
                 </div>
                 <div class="popup-body">
                     <div class="popup-main-description">${museum.description[currentLanguage]}</div>
@@ -1053,6 +997,11 @@
                             <p>${museum.howToArrive[currentLanguage]}</p>
                         </div>
                     ` : ''}
+
+                    <div class="popup-actions">
+                        <button class="popup-action-btn edit-btn" onclick="openEditModal(${museum.id})">✏️ ${currentLanguage === 'it' ? 'Modifica' : 'Edit'}</button>
+                        <button class="popup-action-btn delete-btn" onclick="deleteMuseum(${museum.id})">🗑️ ${currentLanguage === 'it' ? 'Elimina' : 'Delete'}</button>
+                    </div>
                 </div>
             `;
 
@@ -1062,19 +1011,15 @@
                 .addTo(map);
         }
 
-        // Carousel Navigation
         window.changeSlide = function(museumId, direction) {
             const carousel = document.getElementById(`carousel-${museumId}`);
-            if (!carousel) return;
-            
             const sections = carousel.querySelectorAll('.carousel-section');
             const dots = carousel.querySelectorAll('.dot');
             
             let currentIndex = Array.from(sections).findIndex(s => s.classList.contains('active'));
             let newIndex = currentIndex + direction;
             
-            if (newIndex < 0) newIndex = sections.length - 1;
-            if (newIndex >= sections.length) newIndex = 0;
+            if (newIndex < 0 || newIndex >= sections.length) return;
             
             sections[currentIndex].classList.remove('active');
             dots[currentIndex].classList.remove('active');
@@ -1083,192 +1028,175 @@
             dots[newIndex].classList.add('active');
         };
 
-        // Color for sections
         function getColorForSection(index) {
             const colors = ['#f8f4f0', '#f0f8fa', '#faf0f5', '#f5f8f0', '#faf5f0'];
             return colors[index % colors.length];
         }
 
-        // Edit Museum
-        window.editMuseum = function(id) {
-            const museum = museums.find(m => m.id === id);
-            if (!museum) return;
-            
-            editingMuseumId = id;
-            openEditModal(museum);
-        };
-
-        // Delete Museum
-        window.deleteMuseum = function(id) {
-            if (!confirm(currentLanguage === 'it' ? 'Vuoi eliminare questo museo?' : 'Delete this museum?')) return;
-            
-            museums = museums.filter(m => m.id !== id);
-            saveData();
-            renderPlacesList();
-            addMarkers();
-            if (currentPopup) currentPopup.remove();
-        };
-
-        // Open Edit Modal for New
-        function openEditModalForNew(lngLat) {
-            editingMuseumId = null;
-            const museum = {
-                name: { it: '', en: '' },
-                duration: 60,
-                coordinates: [lngLat.lng, lngLat.lat],
-                description: { it: '', en: '' },
-                subsections: [],
-                howToArrive: { it: '', en: '' }
-            };
-            openEditModal(museum);
+        function toggleAdmin() {
+            document.getElementById('admin-panel').classList.toggle('active');
         }
 
-        // Open Edit Modal
-        function openEditModal(museum) {
-            document.getElementById('modal-title').textContent = editingMuseumId ? '✏️ Modifica Museo' : '➕ Aggiungi Nuovo Museo';
+        function startAddingMode() {
+            isAddingMode = true;
+            document.getElementById('map').classList.add('adding-mode');
+            document.getElementById('add-mode-indicator').classList.add('active');
+            document.getElementById('admin-panel').classList.remove('active');
+        }
+
+        function stopAddingMode() {
+            isAddingMode = false;
+            document.getElementById('map').classList.remove('adding-mode');
+            document.getElementById('add-mode-indicator').classList.remove('active');
+        }
+
+        function openEditModal(museumId = null, coords = null) {
+            editingMuseumId = museumId;
+            const modal = document.getElementById('edit-modal');
+            const form = document.getElementById('edit-form');
             
-            document.getElementById('edit-name-it').value = museum.name.it;
-            document.getElementById('edit-name-en').value = museum.name.en;
-            document.getElementById('edit-duration').value = museum.duration || '';
-            document.getElementById('edit-lat').value = museum.coordinates[1];
-            document.getElementById('edit-lng').value = museum.coordinates[0];
-            document.getElementById('edit-desc-it').value = museum.description.it;
-            document.getElementById('edit-desc-en').value = museum.description.en;
-            document.getElementById('edit-arrive-it').value = museum.howToArrive?.it || '';
-            document.getElementById('edit-arrive-en').value = museum.howToArrive?.en || '';
-            
-            // Load subsections
-            const container = document.getElementById('subsections-container');
-            container.innerHTML = '';
-            subsectionCounter = 0;
-            
-            if (museum.subsections && museum.subsections.length > 0) {
-                museum.subsections.forEach(sub => {
-                    addSubsectionToForm(sub);
-                });
+            if (museumId) {
+                const museum = museums.find(m => m.id === museumId);
+                document.getElementById('modal-title').textContent = currentLanguage === 'it' ? 'Modifica Museo' : 'Edit Museum';
+                document.getElementById('name-it').value = museum.name.it;
+                document.getElementById('name-en').value = museum.name.en;
+                document.getElementById('duration').value = museum.duration;
+                document.getElementById('latitude').value = museum.coordinates[1];
+                document.getElementById('longitude').value = museum.coordinates[0];
+                document.getElementById('description-it').value = museum.description.it;
+                document.getElementById('description-en').value = museum.description.en;
+                document.getElementById('arrive-it').value = museum.howToArrive?.it || '';
+                document.getElementById('arrive-en').value = museum.howToArrive?.en || '';
+                
+                renderSubsections(museum.subsections || []);
+            } else {
+                document.getElementById('modal-title').textContent = currentLanguage === 'it' ? 'Aggiungi Museo' : 'Add Museum';
+                form.reset();
+                if (coords) {
+                    document.getElementById('latitude').value = coords[1].toFixed(6);
+                    document.getElementById('longitude').value = coords[0].toFixed(6);
+                }
+                renderSubsections([]);
             }
             
-            document.getElementById('edit-modal').classList.add('active');
+            modal.classList.add('active');
         }
 
-        // Close Edit Modal
         function closeEditModal() {
             document.getElementById('edit-modal').classList.remove('active');
             editingMuseumId = null;
         }
 
-        // Add Subsection to Form
-        function addSubsectionToForm(subsection = null) {
-            const container = document.getElementById('subsections-container');
-            const id = subsectionCounter++;
+        function renderSubsections(subsections) {
+            const container = document.getElementById('subsections-list');
+            container.innerHTML = '';
+            
+            subsections.forEach((sub, idx) => {
+                addSubsectionField(sub, idx);
+            });
+        }
+
+        function addSubsectionField(data = null, index = null) {
+            const container = document.getElementById('subsections-list');
+            const idx = index !== null ? index : container.children.length;
             
             const div = document.createElement('div');
             div.className = 'subsection-item';
-            div.dataset.id = id;
-            
             div.innerHTML = `
-                <button type="button" class="remove-subsection" onclick="removeSubsection(${id})">×</button>
-                <div class="form-group">
-                    <label>Titolo (IT)</label>
-                    <input type="text" class="subsection-title-it" value="${subsection?.title.it || ''}">
-                </div>
-                <div class="form-group">
-                    <label>Titolo (EN)</label>
-                    <input type="text" class="subsection-title-en" value="${subsection?.title.en || ''}">
+                <button type="button" class="remove-subsection" onclick="this.parentElement.remove()">×</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Titolo (IT)</label>
+                        <input type="text" class="subsection-title-it" value="${data?.title?.it || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Titolo (EN)</label>
+                        <input type="text" class="subsection-title-en" value="${data?.title?.en || ''}">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Descrizione (IT)</label>
-                    <textarea class="subsection-desc-it">${subsection?.description.it || ''}</textarea>
+                    <textarea class="subsection-desc-it">${data?.description?.it || ''}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Descrizione (EN)</label>
-                    <textarea class="subsection-desc-en">${subsection?.description.en || ''}</textarea>
+                    <textarea class="subsection-desc-en">${data?.description?.en || ''}</textarea>
                 </div>
             `;
-            
             container.appendChild(div);
         }
 
-        window.addSubsection = function() {
-            addSubsectionToForm();
-        };
-
-        window.removeSubsection = function(id) {
-            const item = document.querySelector(`.subsection-item[data-id="${id}"]`);
-            if (item) item.remove();
-        };
-
-        // Save Museum
         document.getElementById('edit-form').addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const subsections = [];
-            document.querySelectorAll('.subsection-item').forEach(item => {
-                const titleIt = item.querySelector('.subsection-title-it').value;
-                const titleEn = item.querySelector('.subsection-title-en').value;
-                const descIt = item.querySelector('.subsection-desc-it').value;
-                const descEn = item.querySelector('.subsection-desc-en').value;
-                
-                if (titleIt && titleEn) {
-                    subsections.push({
-                        title: { it: titleIt, en: titleEn },
-                        description: { it: descIt, en: descEn }
-                    });
+            const subsectionElements = document.querySelectorAll('.subsection-item');
+            const subsections = Array.from(subsectionElements).map(el => ({
+                title: {
+                    it: el.querySelector('.subsection-title-it').value,
+                    en: el.querySelector('.subsection-title-en').value
+                },
+                description: {
+                    it: el.querySelector('.subsection-desc-it').value,
+                    en: el.querySelector('.subsection-desc-en').value
                 }
-            });
-            
+            }));
+
             const museumData = {
                 id: editingMuseumId || Date.now(),
                 name: {
-                    it: document.getElementById('edit-name-it').value,
-                    en: document.getElementById('edit-name-en').value
+                    it: document.getElementById('name-it').value,
+                    en: document.getElementById('name-en').value
                 },
-                duration: parseInt(document.getElementById('edit-duration').value) || null,
+                duration: parseInt(document.getElementById('duration').value),
                 coordinates: [
-                    parseFloat(document.getElementById('edit-lng').value),
-                    parseFloat(document.getElementById('edit-lat').value)
+                    parseFloat(document.getElementById('longitude').value),
+                    parseFloat(document.getElementById('latitude').value)
                 ],
                 description: {
-                    it: document.getElementById('edit-desc-it').value,
-                    en: document.getElementById('edit-desc-en').value
+                    it: document.getElementById('description-it').value,
+                    en: document.getElementById('description-en').value
                 },
-                subsections: subsections,
                 howToArrive: {
-                    it: document.getElementById('edit-arrive-it').value,
-                    en: document.getElementById('edit-arrive-en').value
-                }
+                    it: document.getElementById('arrive-it').value,
+                    en: document.getElementById('arrive-en').value
+                },
+                subsections: subsections
             };
-            
+
             if (editingMuseumId) {
                 const index = museums.findIndex(m => m.id === editingMuseumId);
                 museums[index] = museumData;
             } else {
                 museums.push(museumData);
             }
-            
+
             saveData();
             renderPlacesList();
             addMarkers();
             closeEditModal();
-            
-            if (currentPopup) currentPopup.remove();
-            showPopup(museumData);
+            alert(currentLanguage === 'it' ? 'Museo salvato!' : 'Museum saved!');
         });
 
-        // Admin Functions
-        function toggleAdmin() {
-            document.getElementById('admin-panel').classList.toggle('active');
+        function deleteMuseum(id) {
+            if (confirm(currentLanguage === 'it' ? 'Eliminare questo museo?' : 'Delete this museum?')) {
+                museums = museums.filter(m => m.id !== id);
+                saveData();
+                renderPlacesList();
+                addMarkers();
+                if (currentPopup) currentPopup.remove();
+                alert(currentLanguage === 'it' ? 'Museo eliminato!' : 'Museum deleted!');
+            }
         }
 
         function exportData() {
+            const date = new Date().toISOString().split('T')[0];
             const dataStr = JSON.stringify(museums, null, 2);
             const blob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `venezia-musei-backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.download = `venezia-musei-backup-${date}.json`;
             a.click();
-            URL.revokeObjectURL(url);
         }
 
         function importData(event) {
@@ -1283,23 +1211,21 @@
                     saveData();
                     renderPlacesList();
                     addMarkers();
-                    alert(currentLanguage === 'it' ? 'Dati importati con successo!' : 'Data imported successfully!');
+                    alert('Dati importati con successo!');
                 } catch (err) {
-                    alert(currentLanguage === 'it' ? 'Errore nell\'importazione: file non valido' : 'Import error: invalid file');
+                    alert('Errore nell\'importazione: file non valido');
                 }
             };
             reader.readAsText(file);
-            event.target.value = '';
         }
 
         function resetToDefault() {
-            if (confirm(currentLanguage === 'it' ? 'Ripristinare i dati predefiniti? Tutti i dati attuali saranno persi.' : 'Reset to default data? All current data will be lost.')) {
-                museums = [...defaultMuseums];
+            if (confirm('Ripristinare i dati predefiniti? Tutti i dati attuali saranno persi.')) {
+                museums = JSON.parse(JSON.stringify(defaultMuseums));
                 saveData();
                 renderPlacesList();
                 addMarkers();
-                if (currentPopup) currentPopup.remove();
-                alert(currentLanguage === 'it' ? 'Dati ripristinati!' : 'Data restored!');
+                alert('Dati ripristinati!');
             }
         }
 
