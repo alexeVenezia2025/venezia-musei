@@ -182,12 +182,19 @@
             backdrop-filter: blur(20px);
             overflow-y: auto;
             box-shadow: 2px 0 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        #sidebar.hidden {
+            width: 0;
+            overflow: hidden;
         }
 
         .sidebar-header {
             padding: 20px;
             background: #81C9DF;
             color: white;
+            position: relative;
         }
 
         .sidebar-header h2 {
@@ -223,9 +230,61 @@
             color: #81C9DF;
         }
 
+        /* Toggle Sidebar Button */
+        .toggle-sidebar-btn {
+            position: fixed;
+            top: 90px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 2px solid #81C9DF;
+            border-radius: 50%;
+            color: #81C9DF;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-sidebar-btn:hover {
+            background: #81C9DF;
+            color: white;
+            transform: scale(1.1);
+        }
+
         /* Map */
         #map {
             flex: 1;
+            cursor: crosshair;
+        }
+
+        #map.normal-cursor {
+            cursor: default;
+        }
+
+        /* Add Mode Indicator */
+        .add-mode-indicator {
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #81C9DF;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(129, 201, 223, 0.4);
+            z-index: 999;
+            font-weight: 600;
+            display: none;
+        }
+
+        .add-mode-indicator.active {
+            display: block;
         }
 
         /* Popup Custom */
@@ -233,7 +292,7 @@
             padding: 0;
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            max-width: 400px;
+            max-width: 450px;
             overflow: hidden;
         }
 
@@ -241,6 +300,7 @@
             padding: 20px;
             background: linear-gradient(135deg, #81C9DF 0%, #6ab5cc 100%);
             color: white;
+            position: relative;
         }
 
         .popup-title {
@@ -254,16 +314,56 @@
             opacity: 0.9;
         }
 
+        .popup-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .popup-action-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .popup-action-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
         .popup-body {
             padding: 20px;
-            max-height: 400px;
+            max-height: 450px;
             overflow-y: auto;
+        }
+
+        .popup-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .popup-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .popup-body::-webkit-scrollbar-thumb {
+            background: #81C9DF;
+            border-radius: 10px;
         }
 
         .popup-main-description {
             color: #333;
             line-height: 1.6;
             margin-bottom: 20px;
+            max-height: none;
         }
 
         /* Carousel */
@@ -376,6 +476,156 @@
             font-size: 14px;
         }
 
+        /* Edit Form Modal */
+        .edit-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 10000;
+            overflow-y: auto;
+        }
+
+        .edit-modal.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+
+        .edit-modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .edit-modal-content h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #81C9DF;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .subsection-item {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .subsection-item .remove-subsection {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .modal-actions button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-save {
+            background: #81C9DF;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #6ab5cc;
+        }
+
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-add {
+            background: #81C9DF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-add:hover {
+            background: #6ab5cc;
+        }
+
         /* Admin Panel */
         .admin-btn {
             position: fixed;
@@ -474,6 +724,14 @@
             </div>
         </div>
 
+        <!-- Toggle Sidebar Button -->
+        <button class="toggle-sidebar-btn" onclick="toggleSidebar()">☰</button>
+
+        <!-- Add Mode Indicator -->
+        <div class="add-mode-indicator" id="add-mode-indicator">
+            📍 Clicca sulla mappa per aggiungere un museo
+        </div>
+
         <!-- Main Container -->
         <div id="main-container">
             <!-- Sidebar -->
@@ -485,7 +743,7 @@
             </div>
 
             <!-- Map -->
-            <div id="map"></div>
+            <div id="map" class="normal-cursor"></div>
         </div>
 
         <!-- Admin Button -->
@@ -494,11 +752,77 @@
         <!-- Admin Panel -->
         <div id="admin-panel" class="admin-panel">
             <h3>🔧 Gestione Dati</h3>
+            <button onclick="toggleAddMode()">📍 Aggiungi Museo sulla Mappa</button>
             <button onclick="exportData()">📥 Esporta Dati (JSON)</button>
             <button onclick="document.getElementById('import-file').click()">📤 Importa Dati (JSON)</button>
             <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
-            <button onclick="addNewPlace()">➕ Aggiungi Nuovo Museo</button>
             <button onclick="resetToDefault()">🔄 Ripristina Dati Predefiniti</button>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="edit-modal" class="edit-modal">
+            <div class="edit-modal-content">
+                <h2 id="modal-title">✏️ Modifica Museo</h2>
+                <form id="edit-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome (Italiano)</label>
+                            <input type="text" id="edit-name-it" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nome (Inglese)</label>
+                            <input type="text" id="edit-name-en" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Durata visita (minuti)</label>
+                            <input type="number" id="edit-duration">
+                        </div>
+                        <div class="form-group">
+                            <label>Latitudine</label>
+                            <input type="number" step="0.000001" id="edit-lat" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Longitudine</label>
+                        <input type="number" step="0.000001" id="edit-lng" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrizione (Italiano)</label>
+                        <textarea id="edit-desc-it" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrizione (Inglese)</label>
+                        <textarea id="edit-desc-en" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Come Arrivare (Italiano)</label>
+                        <textarea id="edit-arrive-it"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Come Arrivare (Inglese)</label>
+                        <textarea id="edit-arrive-en"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sottosezioni</label>
+                        <div id="subsections-container"></div>
+                        <button type="button" class="btn-add" onclick="addSubsection()">➕ Aggiungi Sottosezione</button>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-cancel" onclick="closeEditModal()">Annulla</button>
+                        <button type="submit" class="btn-save">💾 Salva</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -510,6 +834,9 @@
         let map;
         let markers = [];
         let currentPopup = null;
+        let addMode = false;
+        let editingMuseumId = null;
+        let subsectionCounter = 0;
 
         // Museums Data
         const defaultMuseums = [
@@ -525,193 +852,17 @@
                 subsections: [
                     {
                         title: { it: "Architettura e Storia", en: "Architecture and History" },
-                        description: { it: "L'attuale edificio risale principalmente al XIV-XV secolo. La facciata presenta un elegante loggiato al piano terra e al primo piano, sormontato da un corpo compatto rivestito di marmi bianchi e rosa. Il palazzo è collegato alle Prigioni Nuove attraverso il celebre Ponte dei Sospiri.", en: "The current building dates mainly from the 14th-15th century. The facade features an elegant loggia on the ground and first floors, surmounted by a compact body covered with white and pink marble. The palace is connected to the New Prisons through the famous Bridge of Sighs." }
-                    },
-                    {
-                        title: { it: "Sale Principali", en: "Main Halls" },
-                        description: { it: "All'interno si trovano capolavori come la Sala del Maggior Consiglio con il 'Paradiso' di Tintoretto, la Sala del Senato, la Sala del Collegio con opere di Veronese, e gli appartamenti del Doge. Ogni sala è riccamente decorata con dipinti, stucchi e ori.", en: "Inside you'll find masterpieces such as the Great Council Hall with Tintoretto's 'Paradise', the Senate Hall, the Collegio Hall with works by Veronese, and the Doge's apartments. Each room is richly decorated with paintings, stuccos and gold." }
-                    },
-                    {
-                        title: { it: "Prigioni e Ponte dei Sospiri", en: "Prisons and Bridge of Sighs" },
-                        description: { it: "Le prigioni sotterranee ('Pozzi') e le Prigioni Nuove sono collegate al palazzo dal Ponte dei Sospiri (1614). Il nome deriva dai sospiri dei condannati che, attraversandolo, davano l'ultimo sguardo alla laguna.", en: "The underground prisons ('Pozzi') and the New Prisons are connected to the palace by the Bridge of Sighs (1614). The name comes from the sighs of the condemned who, crossing it, took their last look at the lagoon." }
+                        description: { it: "L'attuale edificio risale principalmente al XIV-XV secolo. La facciata presenta un elegante loggiato al piano terra e al primo piano, sormontato da un corpo compatto rivestito di marmi bianchi e rosa.", en: "The current building dates mainly from the 14th-15th century. The facade features an elegant loggia on the ground and first floors, surmounted by a compact body covered with white and pink marble." }
                     }
                 ],
                 howToArrive: {
                     it: "Vaporetto: linee 1, 2, 5.1, 5.2 fermata San Marco-San Zaccaria. A piedi da Piazza San Marco.",
                     en: "Vaporetto: lines 1, 2, 5.1, 5.2 stop at San Marco-San Zaccaria. Walking from St. Mark's Square."
                 }
-            },
-            {
-                id: 2,
-                name: { it: "Gallerie dell'Accademia", en: "Accademia Galleries" },
-                duration: 90,
-                coordinates: [12.3282, 45.4312],
-                description: {
-                    it: "Le Gallerie dell'Accademia ospitano la più importante collezione di arte veneziana al mondo, con opere dal XIV al XVIII secolo. Si trovano nell'ex complesso della Scuola Grande di Santa Maria della Carità.",
-                    en: "The Accademia Galleries house the world's most important collection of Venetian art, with works from the 14th to 18th centuries. Located in the former complex of the Scuola Grande di Santa Maria della Carità."
-                },
-                subsections: [
-                    {
-                        title: { it: "Capolavori Veneziani", en: "Venetian Masterpieces" },
-                        description: { it: "La collezione include opere di Bellini, Giorgione, Tiziano, Tintoretto, Veronese e Canaletto. Tra i capolavori: 'L'Uomo Vitruviano' di Leonardo (esposto raramente), 'La Tempesta' di Giorgione, 'La Cena in Casa Levi' di Veronese.", en: "The collection includes works by Bellini, Giorgione, Titian, Tintoretto, Veronese and Canaletto. Among the masterpieces: Leonardo's 'Vitruvian Man' (rarely exhibited), Giorgione's 'The Tempest', Veronese's 'Feast in the House of Levi'." }
-                    },
-                    {
-                        title: { it: "Scuole Veneziane", en: "Venetian Schools" },
-                        description: { it: "Il museo documenta l'evoluzione della pittura veneziana attraverso i secoli, dalle icone bizantine di Paolo Veneziano ai vedutisti del Settecento come Canaletto e Guardi. È possibile seguire l'evoluzione del colore e della luce tipici della scuola veneziana.", en: "The museum documents the evolution of Venetian painting through the centuries, from Byzantine icons by Paolo Veneziano to 18th-century vedutisti like Canaletto and Guardi. You can follow the evolution of color and light typical of the Venetian school." }
-                    },
-                    {
-                        title: { it: "Architettura del Complesso", en: "Complex Architecture" },
-                        description: { it: "L'edificio comprende l'antica chiesa gotica della Carità, la Scuola Grande e il Convento dei Canonici Lateranensi. Nel 1750 l'architetto Giorgio Massari ristrutturò parte del complesso, creando gli spazi espositivi attuali.", en: "The building includes the ancient Gothic church of Carità, the Scuola Grande and the Convent of the Lateran Canons. In 1750 architect Giorgio Massari renovated part of the complex, creating the current exhibition spaces." }
-                    }
-                ],
-                howToArrive: {
-                    it: "Vaporetto: linea 1 o 2 fermata Accademia. Si trova sul Canal Grande vicino al Ponte dell'Accademia.",
-                    en: "Vaporetto: line 1 or 2 stop Accademia. Located on the Grand Canal near the Accademia Bridge."
-                }
-            },
-            {
-                id: 3,
-                name: { it: "Ca' Rezzonico", en: "Ca' Rezzonico" },
-                duration: 75,
-                coordinates: [12.3266, 45.4335],
-                description: {
-                    it: "Ca' Rezzonico è uno splendido palazzo barocco sul Canal Grande che ospita il Museo del Settecento Veneziano. Offre un'immersione completa nella vita aristocratica veneziana del XVIII secolo.",
-                    en: "Ca' Rezzonico is a splendid Baroque palace on the Grand Canal housing the Museum of 18th Century Venice. It offers a complete immersion in 18th-century Venetian aristocratic life."
-                },
-                subsections: [
-                    {
-                        title: { it: "Palazzo e Collezioni", en: "Palace and Collections" },
-                        description: { it: "Progettato da Baldassare Longhena nel 1667 e completato da Giorgio Massari nel 1750, il palazzo conserva arredi originali, affreschi di Tiepolo, dipinti di Canaletto, Guardi e Longhi, oltre a mobili, ceramiche e oggetti d'uso quotidiano del Settecento.", en: "Designed by Baldassare Longhena in 1667 and completed by Giorgio Massari in 1750, the palace preserves original furnishings, frescoes by Tiepolo, paintings by Canaletto, Guardi and Longhi, as well as furniture, ceramics and everyday objects from the 18th century." }
-                    },
-                    {
-                        title: { it: "Sale Affrescate", en: "Frescoed Halls" },
-                        description: { it: "Il Salone da Ballo al secondo piano è decorato con splendidi affreschi allegorici di Giambattista Tiepolo. La Sala dell'Allegoria Nuziale conserva uno dei più bei cicli decorativi del Settecento veneziano, opera di Tiepolo padre e figlio.", en: "The Ballroom on the second floor is decorated with splendid allegorical frescoes by Giambattista Tiepolo. The Nuptial Allegory Room preserves one of the most beautiful decorative cycles of 18th-century Venice, work of Tiepolo father and son." }
-                    },
-                    {
-                        title: { it: "Farmacia e Curiosità", en: "Pharmacy and Curiosities" },
-                        description: { it: "Al terzo piano si trova la ricostruzione completa di una farmacia settecentesca con mobili, vasi e strumenti originali. Il palazzo ospita anche la Pinacoteca Egidio Martini con opere di Cima da Conegliano, Alvise Vivarini e altri maestri veneti.", en: "On the third floor there is a complete reconstruction of an 18th-century pharmacy with original furniture, jars and instruments. The palace also houses the Egidio Martini Picture Gallery with works by Cima da Conegliano, Alvise Vivarini and other Venetian masters." }
-                    }
-                ],
-                howToArrive: {
-                    it: "Vaporetto: linea 1 fermata Ca' Rezzonico. Si trova sul Canal Grande nel sestiere di Dorsoduro.",
-                    en: "Vaporetto: line 1 stop Ca' Rezzonico. Located on the Grand Canal in the Dorsoduro district."
-                }
-            },
-            {
-                id: 4,
-                name: { it: "Museo Correr", en: "Correr Museum" },
-                duration: 90,
-                coordinates: [12.3378, 45.4338],
-                description: {
-                    it: "Il Museo Correr in Piazza San Marco racconta la storia di Venezia attraverso opere d'arte, documenti storici e oggetti della vita quotidiana. Nato dalla collezione di Teodoro Correr, offre un viaggio nella civiltà veneziana.",
-                    en: "The Correr Museum in St. Mark's Square tells the history of Venice through works of art, historical documents and objects of daily life. Born from Teodoro Correr's collection, it offers a journey into Venetian civilization."
-                },
-                subsections: [
-                    {
-                        title: { it: "Percorso Storico", en: "Historical Route" },
-                        description: { it: "Il museo si articola in sezioni dedicate alla storia della Serenissima: simboli dogali, armature, strumenti navali, globi, mappe antiche, monete e documenti che narrano mille anni di storia. Include gli Appartamenti Imperiali di epoca napoleonica.", en: "The museum is divided into sections dedicated to the history of the Serenissima: dogal symbols, armor, naval instruments, globes, ancient maps, coins and documents that narrate a thousand years of history. Includes Imperial Apartments from the Napoleonic era." }
-                    },
-                    {
-                        title: { it: "Pinacoteca", en: "Art Gallery" },
-                        description: { it: "La Quadreria ospita capolavori della pittura veneta: opere di Cosmè Tura, Antonello da Messina, i Bellini, Carpaccio ('Due Dame Veneziane'), Lorenzo Lotto. La collezione documenta l'evoluzione artistica dal Medioevo al Rinascimento.", en: "The Picture Gallery houses masterpieces of Venetian painting: works by Cosmè Tura, Antonello da Messina, the Bellinis, Carpaccio ('Two Venetian Ladies'), Lorenzo Lotto. The collection documents artistic evolution from the Middle Ages to the Renaissance." }
-                    },
-                    {
-                        title: { it: "Museo del Risorgimento", en: "Risorgimento Museum" },
-                        description: { it: "Una sezione è dedicata alla Venezia dell'Ottocento e al periodo del Risorgimento, con dipinti, documenti e cimeli che narrano la fine della Repubblica (1797), il periodo austriaco e l'annessione al Regno d'Italia (1866).", en: "A section is dedicated to 19th-century Venice and the Risorgimento period, with paintings, documents and relics narrating the end of the Republic (1797), the Austrian period and annexation to the Kingdom of Italy (1866)." }
-                    }
-                ],
-                howToArrive: {
-                    it: "Vaporetto: linee 1, 2, 5.1, 5.2 fermata San Marco-Vallaresso. L'ingresso è in Piazza San Marco, Ala Napoleonica.",
-                    en: "Vaporetto: lines 1, 2, 5.1, 5.2 stop San Marco-Vallaresso. Entrance is in St. Mark's Square, Napoleonic Wing."
-                }
-            },
-            {
-                id: 5,
-                name: { it: "Peggy Guggenheim Collection", en: "Peggy Guggenheim Collection" },
-                duration: 60,
-                coordinates: [12.3315, 45.4306],
-                description: {
-                    it: "Ospitata in Palazzo Venier dei Leoni sul Canal Grande, la collezione espone capolavori dell'arte moderna del XX secolo raccolti da Peggy Guggenheim. Una delle più importanti collezioni europee di arte contemporanea.",
-                    en: "Housed in Palazzo Venier dei Leoni on the Grand Canal, the collection displays masterpieces of 20th-century modern art collected by Peggy Guggenheim. One of Europe's most important contemporary art collections."
-                },
-                subsections: [
-                    {
-                        title: { it: "Collezione Permanente", en: "Permanent Collection" },
-                        description: { it: "La collezione include opere di Picasso, Kandinsky, Mondrian, Miró, Dalí, Magritte, Pollock, de Kooning, Ernst e molti altri. Copre cubismo, futurismo, surrealismo, espressionismo astratto e arte informale. Sculture di Brancusi, Calder e Moore decorano il giardino.", en: "The collection includes works by Picasso, Kandinsky, Mondrian, Miró, Dalí, Magritte, Pollock, de Kooning, Ernst and many others. It covers cubism, futurism, surrealism, abstract expressionism and informal art. Sculptures by Brancusi, Calder and Moore decorate the garden." }
-                    },
-                    {
-                        title: { it: "Palazzo e Giardino", en: "Palace and Garden" },
-                        description: { it: "Palazzo Venier dei Leoni (XVIII sec.) rimase incompiuto, con solo il piano terra costruito. Peggy Guggenheim lo acquistò nel 1949 e vi visse fino alla morte (1979). Il giardino affacciato sul Canal Grande ospita sculture moderne e la tomba della collezionista.", en: "Palazzo Venier dei Leoni (18th century) remained unfinished, with only the ground floor built. Peggy Guggenheim bought it in 1949 and lived there until her death (1979). The garden overlooking the Grand Canal houses modern sculptures and the collector's tomb." }
-                    },
-                    {
-                        title: { it: "Mostre Temporanee", en: "Temporary Exhibitions" },
-                        description: { it: "Il museo organizza regolarmente mostre temporanee dedicate ad artisti del XX secolo, movimenti artistici e temi specifici. Il Padiglione Giardino e gli spazi espositivi accolgono installazioni e progetti speciali in dialogo con la collezione permanente.", en: "The museum regularly organizes temporary exhibitions dedicated to 20th-century artists, artistic movements and specific themes. The Garden Pavilion and exhibition spaces host installations and special projects in dialogue with the permanent collection." }
-                    }
-                ],
-                howToArrive: {
-                    it: "Vaporetto: linea 1 o 2 fermata Accademia, poi 10 minuti a piedi. Oppure linea 2 fermata Salute.",
-                    en: "Vaporetto: line 1 or 2 stop Accademia, then 10 minutes walk. Or line 2 stop Salute."
-                }
-            },
-            {
-                id: 6,
-                name: { it: "Museo di Storia Naturale", en: "Natural History Museum" },
-                duration: 60,
-                coordinates: [12.3313, 45.4408],
-                description: {
-                    it: "Il Museo di Storia Naturale ha sede nel Fontego dei Turchi, palazzo bizantino del XIII secolo affacciato sul Canal Grande. Le collezioni spaziano dalla paleontologia alla zoologia, con particolare attenzione alla laguna veneziana.",
-                    en: "The Natural History Museum is located in the Fontego dei Turchi, a 13th-century Byzantine palace overlooking the Grand Canal. Collections range from paleontology to zoology, with particular attention to the Venetian lagoon."
-                },
-                subsections: [
-                    {
-                        title: { it: "Dinosauri e Fossili", en: "Dinosaurs and Fossils" },
-                        description: { it: "La sezione paleontologica espone lo scheletro completo di un Ouranosaurus nigeriensis e il cranio di uno Spinosaurus. Ricca collezione di fossili, tra cui il famoso coccodrillo di Bolca e pesci fossilizzati dell'Eocene.", en: "The paleontology section displays the complete skeleton of an Ouranosaurus nigeriensis and the skull of a Spinosaurus. Rich fossil collection, including the famous Bolca crocodile and fossilized Eocene fish." }
-                    },
-                    {
-                        title: { it: "Forme della Laguna", en: "Forms of the Lagoon" },
-                        description: { it: "Un percorso dedicato all'ecosistema lagunare veneziano: flora, fauna, geologia e morfologia. Acquari con specie locali, diorami che ricostruiscono gli ambienti della laguna (barene, velme, canneti) e approfondimenti sull'equilibrio ecologico.", en: "A route dedicated to the Venetian lagoon ecosystem: flora, fauna, geology and morphology. Aquariums with local species, dioramas reconstructing lagoon environments (salt marshes, mudflats, reed beds) and insights into ecological balance." }
-                    },
-                    {
-                        title: { it: "Collezioni Naturalistiche", en: "Natural Collections" },
-                        description: { it: "Il museo conserva oltre 2 milioni di reperti: conchiglie, insetti, uccelli, mammiferi, erbari. Particolarmente importante la collezione di pesci adriatici e la raccolta entomologica. Presente anche una sezione dedicata alle esplorazioni scientifiche veneziane.", en: "The museum preserves over 2 million specimens: shells, insects, birds, mammals, herbaria. Particularly important is the Adriatic fish collection and entomological collection. Also features a section dedicated to Venetian scientific explorations." }
-                    }
-                ],
-                howToArrive: {
-                    it: "Vaporetto: linea 1 fermata San Stae. Si trova nel sestiere di Santa Croce, sul Canal Grande.",
-                    en: "Vaporetto: line 1 stop San Stae. Located in the Santa Croce district, on the Grand Canal."
-                }
-            },
-            {
-                id: 7,
-                name: { it: "Ca' Pesaro", en: "Ca' Pesaro" },
-                duration: 75,
-                coordinates: [12.3296, 45.4403],
-                description: {
-                    it: "Ca' Pesaro è un maestoso palazzo barocco sul Canal Grande progettato da Baldassare Longhena. Ospita la Galleria Internazionale d'Arte Moderna e il Museo d'Arte Orientale, con collezioni di grande valore artistico.",
-                    en: "Ca' Pesaro is a majestic Baroque palace on the Grand Canal designed by Baldassare Longhena. It houses the International Gallery of Modern Art and the Museum of Oriental Art, with collections of great artistic value."
-                },
-                subsections: [
-                    {
-                        title: { it: "Arte Moderna", en: "Modern Art" },
-                        description: { it: "La Galleria d'Arte Moderna espone opere dall'Ottocento al primo Novecento: Klimt ('Giuditta II'), Chagall, Kandinsky, Klee, Morandi, de Chirico, Boccioni, Carrà. Forte la presenza di artisti italiani legati alla Biennale di Venezia.", en: "The Modern Art Gallery exhibits works from the 19th to early 20th century: Klimt ('Judith II'), Chagall, Kandinsky, Klee, Morandi, de Chirico, Boccioni, Carrà. Strong presence of Italian artists connected to the Venice Biennale." }
-                    },
-                    {
-                        title: { it: "Museo d'Arte Orientale", en: "Museum of Oriental Art" },
-                        description: { it: "Al terzo piano si trova una delle più importanti collezioni di arte orientale in Italia: oltre 30.000 pezzi dall'Estremo Oriente (Giappone, Cina, Indonesia). Armi samurai, porcellane, lacche, stoffe, bronzi e oggetti della Cina imperiale e del periodo Edo giapponese.", en: "On the third floor is one of Italy's most important Oriental art collections: over 30,000 pieces from the Far East (Japan, China, Indonesia). Samurai weapons, porcelain, lacquerware, fabrics, bronzes and objects from Imperial China and Japanese Edo period." }
-                    },
-                    {
-                        title: { it: "Architettura Barocca", en: "Baroque Architecture" },
-                        description: { it: "Il palazzo, iniziato da Longhena nel 1659 e completato nel 1710, è uno dei capolavori del barocco veneziano. La facciata sul Canal Grande presenta due ordini di bifore con ricca decorazione scultorea. Gli interni conservano affreschi e stucchi d'epoca.", en: "The palace, begun by Longhena in 1659 and completed in 1710, is one of the masterpieces of Venetian Baroque. The facade on the Grand Canal has two orders of mullioned windows with rich sculptural decoration. Interiors preserve period frescoes and stuccos." }
-                    }
-                ],
-                howToArrive: {
-                    it: "Vaporetto: linea 1 fermata San Stae. Si trova nel sestiere di Santa Croce, sul Canal Grande.",
-                    en: "Vaporetto: line 1 stop San Stae. Located in the Santa Croce district, on the Grand Canal."
-                }
             }
         ];
 
-        // Load data from localStorage or use default
+        // Load data
         let museums = JSON.parse(localStorage.getItem('venezia-musei-data')) || defaultMuseums;
 
         // Login
@@ -742,19 +893,22 @@
             const texts = {
                 it: {
                     headerTitle: 'Musei di Venezia',
-                    sidebarTitle: 'Legenda Musei',
-                    duration: 'min'
+                    sidebarTitle: 'Legenda Musei'
                 },
                 en: {
                     headerTitle: 'Venice Museums',
-                    sidebarTitle: 'Museums Legend',
-                    duration: 'min'
+                    sidebarTitle: 'Museums Legend'
                 }
             };
             document.getElementById('header-title-text').textContent = texts[currentLanguage].headerTitle;
             document.getElementById('sidebar-title').textContent = texts[currentLanguage].sidebarTitle;
             renderPlacesList();
             if (currentPopup) currentPopup.remove();
+        }
+
+        // Toggle Sidebar
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('hidden');
         }
 
         // Initialize App
@@ -774,6 +928,29 @@
             });
 
             map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+            // Map click for adding places
+            map.on('click', (e) => {
+                if (addMode) {
+                    openEditModalForNew(e.lngLat);
+                    toggleAddMode();
+                }
+            });
+        }
+
+        // Toggle Add Mode
+        function toggleAddMode() {
+            addMode = !addMode;
+            const indicator = document.getElementById('add-mode-indicator');
+            const mapEl = document.getElementById('map');
+            
+            if (addMode) {
+                indicator.classList.add('active');
+                mapEl.classList.remove('normal-cursor');
+            } else {
+                indicator.classList.remove('active');
+                mapEl.classList.add('normal-cursor');
+            }
         }
 
         // Render Places List
@@ -789,6 +966,7 @@
                     item.classList.add('active');
                     if (museum.coordinates) {
                         map.flyTo({ center: museum.coordinates, zoom: 16 });
+                        showPopup(museum);
                     }
                 };
                 
@@ -815,7 +993,6 @@
                 if (!museum.coordinates) return;
 
                 const el = document.createElement('div');
-                el.className = 'marker';
                 el.innerHTML = '🏛️';
                 el.style.fontSize = '28px';
                 el.style.cursor = 'pointer';
@@ -833,13 +1010,16 @@
         function showPopup(museum) {
             if (currentPopup) currentPopup.remove();
 
-            let carouselIndex = 0;
             const subsections = museum.subsections || [];
 
             const popupContent = `
                 <div class="popup-header">
                     <div class="popup-title">${museum.name[currentLanguage]}</div>
                     ${museum.duration ? `<div class="popup-duration">⏱️ ${museum.duration} ${currentLanguage === 'it' ? 'minuti' : 'minutes'}</div>` : ''}
+                    <div class="popup-actions">
+                        <button class="popup-action-btn" onclick="editMuseum(${museum.id})">✏️</button>
+                        <button class="popup-action-btn" onclick="deleteMuseum(${museum.id})">🗑️</button>
+                    </div>
                 </div>
                 <div class="popup-body">
                     <div class="popup-main-description">${museum.description[currentLanguage]}</div>
@@ -885,6 +1065,8 @@
         // Carousel Navigation
         window.changeSlide = function(museumId, direction) {
             const carousel = document.getElementById(`carousel-${museumId}`);
+            if (!carousel) return;
+            
             const sections = carousel.querySelectorAll('.carousel-section');
             const dots = carousel.querySelectorAll('.dot');
             
@@ -907,6 +1089,172 @@
             return colors[index % colors.length];
         }
 
+        // Edit Museum
+        window.editMuseum = function(id) {
+            const museum = museums.find(m => m.id === id);
+            if (!museum) return;
+            
+            editingMuseumId = id;
+            openEditModal(museum);
+        };
+
+        // Delete Museum
+        window.deleteMuseum = function(id) {
+            if (!confirm(currentLanguage === 'it' ? 'Vuoi eliminare questo museo?' : 'Delete this museum?')) return;
+            
+            museums = museums.filter(m => m.id !== id);
+            saveData();
+            renderPlacesList();
+            addMarkers();
+            if (currentPopup) currentPopup.remove();
+        };
+
+        // Open Edit Modal for New
+        function openEditModalForNew(lngLat) {
+            editingMuseumId = null;
+            const museum = {
+                name: { it: '', en: '' },
+                duration: 60,
+                coordinates: [lngLat.lng, lngLat.lat],
+                description: { it: '', en: '' },
+                subsections: [],
+                howToArrive: { it: '', en: '' }
+            };
+            openEditModal(museum);
+        }
+
+        // Open Edit Modal
+        function openEditModal(museum) {
+            document.getElementById('modal-title').textContent = editingMuseumId ? '✏️ Modifica Museo' : '➕ Aggiungi Nuovo Museo';
+            
+            document.getElementById('edit-name-it').value = museum.name.it;
+            document.getElementById('edit-name-en').value = museum.name.en;
+            document.getElementById('edit-duration').value = museum.duration || '';
+            document.getElementById('edit-lat').value = museum.coordinates[1];
+            document.getElementById('edit-lng').value = museum.coordinates[0];
+            document.getElementById('edit-desc-it').value = museum.description.it;
+            document.getElementById('edit-desc-en').value = museum.description.en;
+            document.getElementById('edit-arrive-it').value = museum.howToArrive?.it || '';
+            document.getElementById('edit-arrive-en').value = museum.howToArrive?.en || '';
+            
+            // Load subsections
+            const container = document.getElementById('subsections-container');
+            container.innerHTML = '';
+            subsectionCounter = 0;
+            
+            if (museum.subsections && museum.subsections.length > 0) {
+                museum.subsections.forEach(sub => {
+                    addSubsectionToForm(sub);
+                });
+            }
+            
+            document.getElementById('edit-modal').classList.add('active');
+        }
+
+        // Close Edit Modal
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.remove('active');
+            editingMuseumId = null;
+        }
+
+        // Add Subsection to Form
+        function addSubsectionToForm(subsection = null) {
+            const container = document.getElementById('subsections-container');
+            const id = subsectionCounter++;
+            
+            const div = document.createElement('div');
+            div.className = 'subsection-item';
+            div.dataset.id = id;
+            
+            div.innerHTML = `
+                <button type="button" class="remove-subsection" onclick="removeSubsection(${id})">×</button>
+                <div class="form-group">
+                    <label>Titolo (IT)</label>
+                    <input type="text" class="subsection-title-it" value="${subsection?.title.it || ''}">
+                </div>
+                <div class="form-group">
+                    <label>Titolo (EN)</label>
+                    <input type="text" class="subsection-title-en" value="${subsection?.title.en || ''}">
+                </div>
+                <div class="form-group">
+                    <label>Descrizione (IT)</label>
+                    <textarea class="subsection-desc-it">${subsection?.description.it || ''}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Descrizione (EN)</label>
+                    <textarea class="subsection-desc-en">${subsection?.description.en || ''}</textarea>
+                </div>
+            `;
+            
+            container.appendChild(div);
+        }
+
+        window.addSubsection = function() {
+            addSubsectionToForm();
+        };
+
+        window.removeSubsection = function(id) {
+            const item = document.querySelector(`.subsection-item[data-id="${id}"]`);
+            if (item) item.remove();
+        };
+
+        // Save Museum
+        document.getElementById('edit-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const subsections = [];
+            document.querySelectorAll('.subsection-item').forEach(item => {
+                const titleIt = item.querySelector('.subsection-title-it').value;
+                const titleEn = item.querySelector('.subsection-title-en').value;
+                const descIt = item.querySelector('.subsection-desc-it').value;
+                const descEn = item.querySelector('.subsection-desc-en').value;
+                
+                if (titleIt && titleEn) {
+                    subsections.push({
+                        title: { it: titleIt, en: titleEn },
+                        description: { it: descIt, en: descEn }
+                    });
+                }
+            });
+            
+            const museumData = {
+                id: editingMuseumId || Date.now(),
+                name: {
+                    it: document.getElementById('edit-name-it').value,
+                    en: document.getElementById('edit-name-en').value
+                },
+                duration: parseInt(document.getElementById('edit-duration').value) || null,
+                coordinates: [
+                    parseFloat(document.getElementById('edit-lng').value),
+                    parseFloat(document.getElementById('edit-lat').value)
+                ],
+                description: {
+                    it: document.getElementById('edit-desc-it').value,
+                    en: document.getElementById('edit-desc-en').value
+                },
+                subsections: subsections,
+                howToArrive: {
+                    it: document.getElementById('edit-arrive-it').value,
+                    en: document.getElementById('edit-arrive-en').value
+                }
+            };
+            
+            if (editingMuseumId) {
+                const index = museums.findIndex(m => m.id === editingMuseumId);
+                museums[index] = museumData;
+            } else {
+                museums.push(museumData);
+            }
+            
+            saveData();
+            renderPlacesList();
+            addMarkers();
+            closeEditModal();
+            
+            if (currentPopup) currentPopup.remove();
+            showPopup(museumData);
+        });
+
         // Admin Functions
         function toggleAdmin() {
             document.getElementById('admin-panel').classList.toggle('active');
@@ -918,8 +1266,9 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'venezia-musei-backup.json';
+            a.download = `venezia-musei-backup-${new Date().toISOString().split('T')[0]}.json`;
             a.click();
+            URL.revokeObjectURL(url);
         }
 
         function importData(event) {
@@ -931,56 +1280,26 @@
                 try {
                     const data = JSON.parse(e.target.result);
                     museums = data;
-                    localStorage.setItem('venezia-musei-data', JSON.stringify(museums));
+                    saveData();
                     renderPlacesList();
                     addMarkers();
-                    alert('Dati importati con successo!');
+                    alert(currentLanguage === 'it' ? 'Dati importati con successo!' : 'Data imported successfully!');
                 } catch (err) {
-                    alert('Errore nell\'importazione: file non valido');
+                    alert(currentLanguage === 'it' ? 'Errore nell\'importazione: file non valido' : 'Import error: invalid file');
                 }
             };
             reader.readAsText(file);
-        }
-
-        function addNewPlace() {
-            const name = prompt('Nome del museo (IT):');
-            if (!name) return;
-            
-            const nameEn = prompt('Nome del museo (EN):');
-            const duration = parseInt(prompt('Durata visita (minuti):') || '60');
-            const lat = parseFloat(prompt('Latitudine:') || '45.4371');
-            const lng = parseFloat(prompt('Longitudine:') || '12.3350');
-            
-            const newMuseum = {
-                id: Date.now(),
-                name: { it: name, en: nameEn || name },
-                duration: duration,
-                coordinates: [lng, lat],
-                description: {
-                    it: 'Descrizione da aggiungere',
-                    en: 'Description to be added'
-                },
-                subsections: [],
-                howToArrive: {
-                    it: 'Da definire',
-                    en: 'To be defined'
-                }
-            };
-            
-            museums.push(newMuseum);
-            saveData();
-            renderPlacesList();
-            addMarkers();
-            alert('Nuovo museo aggiunto!');
+            event.target.value = '';
         }
 
         function resetToDefault() {
-            if (confirm('Ripristinare i dati predefiniti? Tutti i dati attuali saranno persi.')) {
+            if (confirm(currentLanguage === 'it' ? 'Ripristinare i dati predefiniti? Tutti i dati attuali saranno persi.' : 'Reset to default data? All current data will be lost.')) {
                 museums = [...defaultMuseums];
                 saveData();
                 renderPlacesList();
                 addMarkers();
-                alert('Dati ripristinati!');
+                if (currentPopup) currentPopup.remove();
+                alert(currentLanguage === 'it' ? 'Dati ripristinati!' : 'Data restored!');
             }
         }
 
